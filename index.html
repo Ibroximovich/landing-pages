@@ -1,15 +1,18 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="uz">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Biznesingizni Keyingi Darajaga Ko'taring</title>
+  <title>Biznesingizni Keyingi Darajaga Ko'taring | Biznes Studio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+          },
           colors: {
             brand: {
               light: '#4f46e5',
@@ -19,21 +22,53 @@
             }
           },
           boxShadow: {
-            glow: '0 35px 120px rgba(99,102,241,0.18)'
+            glow: '0 35px 120px rgba(99,102,241,0.18)',
+            soft: '0 24px 80px rgba(15,23,42,0.08)'
           }
         }
       }
     }
   </script>
   <style>
-    .scroll-reveal {
+    :root {
+      color-scheme: light;
+    }
+    .dark {
+      color-scheme: dark;
+    }
+    .scroll-reveal,
+    .reveal-left,
+    .reveal-right {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(32px);
       transition: opacity 0.9s ease, transform 0.9s ease;
     }
-    .scroll-reveal.active {
+    .reveal-left {
+      transform: translateX(-40px);
+    }
+    .reveal-right {
+      transform: translateX(40px);
+    }
+    .scroll-reveal.active,
+    .reveal-left.active,
+    .reveal-right.active {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(0) translateY(0);
+    }
+    .hero-gradient {
+      background: radial-gradient(circle at top right, rgba(99,102,241,0.18), transparent 45%),
+                  radial-gradient(circle at bottom left, rgba(34,197,94,0.15), transparent 30%);
+    }
+    .portfolio-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15,23,42,0.02), rgba(15,23,42,0.8));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .group:hover .portfolio-overlay::before {
+      opacity: 1;
     }
   </style>
 </head>
@@ -42,11 +77,11 @@
     <!-- ================== NAVBAR ================== -->
     <header class="sticky top-0 z-50 border-b border-slate-200/50 bg-white/90 backdrop-blur-xl transition-colors duration-300 dark:border-white/10 dark:bg-slate-950/95">
       <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <!-- Bu yerga o'z logotipingizni yoki kompaniya nomingiz qisqartmasini yozing -->
+        <!-- Bu yerga logotip yoki brend qisqartmasi yoziladi -->
         <a href="#" class="flex items-center gap-3 text-slate-950 transition-colors duration-300 dark:text-white">
-          <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-light to-brand-dark text-lg font-bold shadow-glow">B</span>
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-br from-brand-light to-brand-dark text-lg font-bold text-white shadow-glow">B</span>
           <div>
-            <!-- Bu yerga o'z kompaniya nomingizni yozing -->
+            <!-- Bu yerga kompaniya nomi yoziladi -->
             <p class="text-sm font-semibold">Biznes Studio</p>
             <p class="text-[11px] text-slate-400">Premium Agency</p>
           </div>
@@ -74,210 +109,218 @@
           <a href="#advantages" class="text-sm text-slate-700 transition hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">Afzalliklar</a>
           <a href="#portfolio" class="text-sm text-slate-700 transition hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">Portfolio</a>
           <a href="#contact" class="text-sm text-slate-700 transition hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">Kontakt</a>
-         
         </nav>
       </div>
     </header>
 
     <!-- ================== HERO SECTION ================== -->
     <main class="overflow-hidden">
-      <section class="relative mx-auto flex max-w-7xl flex-col gap-12 px-6 py-16 lg:flex-row lg:items-center lg:px-8 lg:py-24">
-        <div class="max-w-2xl space-y-8">
-          <div class="inline-flex items-center gap-3 rounded-full bg-slate-100 px-4 py-2 text-sm text-slate-700 shadow-glow dark:bg-white/5 dark:text-slate-200">
+      <section class="relative mx-auto flex max-w-7xl flex-col gap-12 px-6 py-20 lg:flex-row lg:items-center lg:px-8 lg:py-28">
+        <div class="max-w-2xl space-y-10">
+          <div class="inline-flex items-center gap-3 rounded-full bg-slate-100 px-4 py-2 text-sm text-slate-700 shadow-soft dark:bg-white/5 dark:text-slate-200">
             <span class="h-2.5 w-2.5 rounded-full bg-brand-accent"></span>
-            <span><!-- Bu yerga kampaniya yoritilishi qo'shiladi -->Yangi raqamli yechimlar bilan biznesingizni kuchaytiramiz</span>
+            <span>Premium raqamli yechimlar bilan brendingizni ishonchli ravishda yuksaltiring</span>
           </div>
-          <div class="space-y-6">
-            <!-- Bu yerga katta va ta'sirli sarlavha matnini yozing -->
-            <h1 class="scroll-reveal text-5xl font-bold tracking-tight text-slate-950 sm:text-6xl xl:text-7xl dark:text-white">Biznesingizni <span class="bg-gradient-to-r from-brand-light via-brand-dark to-brand-accent bg-clip-text text-transparent">Keyingi Darajaga Ko'taring</span></h1>
+          <div class="space-y-8">
+            <!-- Bu yerga katta va ta'sirli sarlavha yozing -->
+            <h1 class="scroll-reveal text-5xl font-extrabold tracking-tight text-slate-950 sm:text-6xl xl:text-7xl dark:text-white">
+              <span class="block">Biznesingizni</span>
+              <span class="block bg-gradient-to-r from-brand-light via-brand-dark to-brand-accent bg-clip-text text-transparent">premium hamkorlik</span>
+              <span class="block">bilan onlayn maydonda kuchaytiring.</span>
+            </h1>
             <!-- Bu yerga qisqa va aniq lead matn kiriting -->
-            <p class="scroll-reveal max-w-xl text-lg leading-8 text-slate-600 dark:text-slate-300">Biznes va agentliklar uchun premium veb-sayt, brend strategiyasi, raqamli marketing va konversiyani oshirishga yo'naltirilgan yechimlar. Sizga moslashtirilgan, zamonaviy va professional dizayn.</p>
+            <p class="scroll-reveal max-w-xl text-lg leading-8 text-slate-600 dark:text-slate-300">Soff.uz platformasi uchun maxsus ishlab chiqilgan, zamonaviy va yuqori konversiyali biznes landing page. Brendingizga yuzaga yaqin davomiy mijozlar oqimini jalb qilamiz.</p>
           </div>
           <div class="scroll-reveal flex flex-col gap-4 sm:flex-row">
-            <a href="#contact" class="inline-flex items-center justify-center rounded-full bg-brand-accent px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400">Bugun boshlash</a>
-            <a href="#services" class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:border-brand-light hover:text-brand-light dark:border-white/20 dark:bg-white/5 dark:text-white">Xizmatlarimiz</a>
+            <a href="#contact" class="inline-flex items-center justify-center rounded-full bg-brand-accent px-8 py-4 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400">Bugun boshlash</a>
+            <a href="#services" class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-8 py-4 text-sm font-semibold text-slate-950 transition hover:border-brand-light hover:text-brand-light dark:border-white/20 dark:bg-white/5 dark:text-white">Xizmatlarimiz</a>
           </div>
           <div class="grid gap-4 sm:grid-cols-2">
-            <div class="rounded-3xl bg-slate-100 p-6 shadow-glow backdrop-blur-xl dark:bg-white/5">
-              <p class="text-sm uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">ROI faolligi</p>
-              <p class="mt-3 text-3xl font-semibold text-slate-950 dark:text-white">+ 42%</p>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Strategik yechimlar bilan natijani tezda oshiramiz.</p>
+            <div class="rounded-[2rem] bg-slate-100 p-8 shadow-soft dark:bg-white/5">
+              <p class="text-sm uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">ROI oshishi</p>
+              <p class="mt-4 text-4xl font-semibold text-slate-950 dark:text-white">+42%</p>
+              <p class="mt-3 text-sm text-slate-600 dark:text-slate-400">Natijaga yo‘naltirilgan strategiya va soha tajribasi.</p>
             </div>
-            <div class="rounded-3xl bg-slate-100 p-6 shadow-glow backdrop-blur-xl dark:bg-white/5">
-              <p class="text-sm uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">Ishgaoqilish</p>
-              <p class="mt-3 text-3xl font-semibold text-slate-950 dark:text-white">12+</p>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">sohada tajribali mutaxassislar jamoasi.</p>
+            <div class="rounded-[2rem] bg-slate-100 p-8 shadow-soft dark:bg-white/5">
+              <p class="text-sm uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">Ishonchli jamoa</p>
+              <p class="mt-4 text-4xl font-semibold text-slate-950 dark:text-white">15+</p>
+              <p class="mt-3 text-sm text-slate-600 dark:text-slate-400">Brend, dizayn va marketing sohasida hamkorlik qilgan mutaxassislar.</p>
             </div>
           </div>
         </div>
 
-        <div class="relative scroll-reveal flex-1">
-          <div class="absolute inset-x-0 top-0 -z-10 h-[420px] rounded-full bg-gradient-to-r from-brand-light/30 via-brand-dark/20 to-brand-accent/20 blur-3xl"></div>
-          <div class="overflow-hidden rounded-[2rem] border border-slate-200/50 bg-white shadow-glow dark:border-white/10 dark:bg-slate-900/95">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1100&q=80" alt="Biznes strategiyasi - professional ofis va ijodiy ish" class="h-full w-full object-cover object-center transition duration-500 hover:scale-105" />
-            <div class="absolute bottom-0 left-0 right-0 rounded-b-[2rem] bg-gradient-to-t from-slate-950/90 to-transparent p-6 text-white">
-              <p class="text-sm uppercase tracking-[0.3em] text-slate-300">Raqamli Agеnsiya</p>
-              <h2 class="mt-2 text-2xl font-semibold">Har bir loyiha uchun eksklyuziv yondashuv</h2>
+        <div class="relative scroll-reveal flex-1 hero-gradient rounded-[2.5rem] p-1 lg:p-2">
+          <div class="overflow-hidden rounded-[2.25rem] border border-slate-200/40 bg-white shadow-[0_35px_100px_rgba(99,102,241,0.15)] dark:border-white/10 dark:bg-slate-950/95">
+            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80" alt="Premium biznes strategiyasi va zamonaviy ofis" class="h-full w-full object-cover object-center transition duration-700 hover:scale-105" />
+            <div class="absolute inset-x-0 bottom-0 rounded-b-[2.25rem] bg-gradient-to-t from-slate-950/95 to-transparent p-6 text-white">
+              <p class="text-sm uppercase tracking-[0.3em] text-slate-300">Premium Agentlik</p>
+              <h2 class="mt-3 text-2xl font-semibold">Strategiya, dizayn va konversiya sinergiyasi</h2>
             </div>
           </div>
         </div>
       </section>
 
       <!-- ================== SERVICES SECTION ================== -->
-      <section id="services" class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-        <div class="mb-12 text-center">
+      <section id="services" class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <div class="mb-14 text-center">
           <p class="text-sm uppercase tracking-[0.3em] text-brand-accent">Xizmatlarimiz</p>
-          <h2 class="mt-4 text-4xl font-bold text-slate-950 dark:text-white">Siz uchun ishlab chiqilgan to'liq xizmatlar</h2>
-          <p class="mx-auto mt-4 max-w-2xl text-slate-600 dark:text-slate-400">Biznesingizni raqamli maydonda ilgari surish uchun strategik, dizayn, va marketing yechimlari.</p>
+          <h2 class="mt-4 text-4xl font-bold text-slate-950 dark:text-white">Siz uchun to‘liq raqamli tajriba</h2>
+          <p class="mx-auto mt-4 max-w-2xl text-slate-600 dark:text-slate-400">Har bir yechimimiz biznesingizni onlayn maydonda ishonchli, chiroyli va konvertatsion qilishga qaratilgan.</p>
         </div>
         <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          <article class="scroll-reveal rounded-3xl border border-slate-200/50 bg-white p-8 transition hover:-translate-y-1 hover:border-brand-light/40 dark:border-white/10 dark:bg-slate-900/80">
-            <div class="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-3xl bg-brand-light/10 text-brand-light shadow-lg shadow-brand-light/20">💡</div>
+          <article class="reveal-left group rounded-[2rem] border border-slate-200/60 bg-white p-8 transition duration-500 hover:-translate-y-2 hover:border-brand-light/40 hover:shadow-soft dark:border-white/10 dark:bg-slate-900/85">
+            <div class="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-brand-light/10 text-brand-light shadow-lg shadow-brand-light/20">💡</div>
             <h3 class="text-xl font-semibold text-slate-950 dark:text-white">Brend Strategiyasi</h3>
-            <p class="mt-3 text-slate-400">Kompetent brend hikoyasi bilan mijozlaringizni qiziqtirish va bozorda ajralib turish.</p>
+            <p class="mt-3 text-slate-500 dark:text-slate-400">Har bir brend uchun noyob pozitsiyalanish, ovoz va premium hikoya yaratiladi.</p>
           </article>
-          <article class="scroll-reveal rounded-3xl border border-slate-200/50 bg-white p-8 transition hover:-translate-y-1 hover:border-brand-light/40 dark:border-white/10 dark:bg-slate-900/80">
-            <div class="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-3xl bg-brand-dark/10 text-brand-dark shadow-lg shadow-brand-dark/20">🖥️</div>
+          <article class="reveal-right group rounded-[2rem] border border-slate-200/60 bg-white p-8 transition duration-500 hover:-translate-y-2 hover:border-brand-light/40 hover:shadow-soft dark:border-white/10 dark:bg-slate-900/85">
+            <div class="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-brand-dark/10 text-brand-dark shadow-lg shadow-brand-dark/20">🖥️</div>
             <h3 class="text-xl font-semibold text-slate-950 dark:text-white">Veb-sayt Dizayni</h3>
-            <p class="mt-3 text-slate-400">Zamonaviy, responsive va konversiyaga yo'naltirilgan saytlar ishlab chiqamiz.</p>
+            <p class="mt-3 text-slate-500 dark:text-slate-400">Zamonaviy interfeyslar, mobilga moslashuvchan layout va yuqori konversiyali struktura.</p>
           </article>
-          <article class="scroll-reveal rounded-3xl border border-slate-200/50 bg-white p-8 transition hover:-translate-y-1 hover:border-brand-light/40 dark:border-white/10 dark:bg-slate-900/80">
-            <div class="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-3xl bg-brand-accent/10 text-brand-accent shadow-lg shadow-brand-accent/20">📈</div>
+          <article class="reveal-left group rounded-[2rem] border border-slate-200/60 bg-white p-8 transition duration-500 hover:-translate-y-2 hover:border-brand-light/40 hover:shadow-soft dark:border-white/10 dark:bg-slate-900/85">
+            <div class="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-brand-accent/10 text-brand-accent shadow-lg shadow-brand-accent/20">📈</div>
             <h3 class="text-xl font-semibold text-slate-950 dark:text-white">Raqamli Marketing</h3>
-            <p class="mt-3 text-slate-400">Google, Facebook va email kampaniyalar orqali aniq natijalarni oshiramiz.</p>
+            <p class="mt-3 text-slate-500 dark:text-slate-400">Reklama, SEO va performance kampaniyalari orqali aniq o‘sish va ROI ta’minlaymiz.</p>
           </article>
-          <article class="scroll-reveal rounded-3xl border border-slate-200/50 bg-white p-8 transition hover:-translate-y-1 hover:border-brand-light/40 dark:border-white/10 dark:bg-slate-900/80">
-            <div class="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-3xl bg-brand-soft/10 text-brand-soft shadow-lg shadow-brand-soft/20">🧭</div>
+          <article class="reveal-right group rounded-[2rem] border border-slate-200/60 bg-white p-8 transition duration-500 hover:-translate-y-2 hover:border-brand-light/40 hover:shadow-soft dark:border-white/10 dark:bg-slate-900/85">
+            <div class="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-brand-soft/10 text-brand-soft shadow-lg shadow-brand-soft/20">🧭</div>
             <h3 class="text-xl font-semibold text-slate-950 dark:text-white">UX / UI Tadqiqot</h3>
-            <p class="mt-3 text-slate-400">Foydalanuvchi tajribasini tahlil qilib, interaktiv va silliq yo'l xaritalar yaratamiz.</p>
+            <p class="mt-3 text-slate-500 dark:text-slate-400">Foydalanuvchi yo‘nalishi va tajriba dizayni orqali mahsulotni tezroq qabul qilinishini ta’minlaymiz.</p>
           </article>
-          <article class="scroll-reveal rounded-3xl border border-slate-200/50 bg-white p-8 transition hover:-translate-y-1 hover:border-brand-light/40 dark:border-white/10 dark:bg-slate-900/80">
-            <div class="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-3xl bg-brand-light/10 text-brand-light shadow-lg shadow-brand-light/20">⚡</div>
+          <article class="reveal-left group rounded-[2rem] border border-slate-200/60 bg-white p-8 transition duration-500 hover:-translate-y-2 hover:border-brand-light/40 hover:shadow-soft dark:border-white/10 dark:bg-slate-900/85">
+            <div class="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-brand-light/10 text-brand-light shadow-lg shadow-brand-light/20">⚡</div>
             <h3 class="text-xl font-semibold text-slate-950 dark:text-white">Tezkor Loyihalash</h3>
-            <p class="mt-3 text-slate-400">Tez vaqt ichida sifatli prototiplar va funksional ishlovchi mahsulotlar taqdim etamiz.</p>
+            <p class="mt-3 text-slate-500 dark:text-slate-400">Sifatli prototiplar va tezkor ishga tushirish uchun loyiha bosqichlarini optimizatsiya qilamiz.</p>
           </article>
-          <article class="scroll-reveal rounded-3xl border border-slate-200/50 bg-white p-8 transition hover:-translate-y-1 hover:border-brand-light/40 dark:border-white/10 dark:bg-slate-900/80">
-            <div class="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-3xl bg-brand-accent/10 text-brand-accent shadow-lg shadow-brand-accent/20">🤝</div>
+          <article class="reveal-right group rounded-[2rem] border border-slate-200/60 bg-white p-8 transition duration-500 hover:-translate-y-2 hover:border-brand-light/40 hover:shadow-soft dark:border-white/10 dark:bg-slate-900/85">
+            <div class="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-brand-accent/10 text-brand-accent shadow-lg shadow-brand-accent/20">🤝</div>
             <h3 class="text-xl font-semibold text-slate-950 dark:text-white">Strategik Konsalting</h3>
-            <p class="mt-3 text-slate-400">Sizning biznes modelingiz va maqsadlaringizga mos keladigan aniq strategiyalar.</p>
+            <p class="mt-3 text-slate-500 dark:text-slate-400">Sizning biznesingiz uchun aniq yo‘nalish, mahsulotni bozorga chiqarish va raqamli o‘sish strategiyasi.</p>
           </article>
         </div>
       </section>
 
       <!-- ================== ADVANTAGES SECTION ================== -->
-      <section id="advantages" class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+      <section id="advantages" class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
         <div class="grid gap-16 lg:grid-cols-2 lg:items-center">
           <div class="space-y-6">
             <p class="text-sm uppercase tracking-[0.3em] text-brand-accent">Bizning Afzalliklarimiz</p>
-            <h2 class="text-4xl font-bold text-slate-950 dark:text-white">Har bir hamkorlik uchun noyob qiymat</h2>
-            <p class="max-w-xl text-slate-600 dark:text-slate-400">Agеntligimiz mijozga yo'naltirilgan va natijaga e'tibor beruvchi jarayonni taklif etadi. Har bir element strategik ravishda o'ylab chiqiladi.</p>
+            <h2 class="text-4xl font-bold text-slate-950 dark:text-white">Qadriyatingizni sezgir va natijaga yo‘naltirilgan tarzda oshiramiz</h2>
+            <p class="max-w-xl text-slate-600 dark:text-slate-400">Biznesingiz uchun har bir elementni maqsadga muvofiq ishlab chiqamiz: brend, foydalanuvchi tajribasi, vizual til va aniq metrikslar orqali.</p>
           </div>
           <div class="grid gap-5 sm:grid-cols-2">
-            <div class="scroll-reveal rounded-3xl border border-slate-200/50 bg-white p-6 shadow-glow dark:border-white/10 dark:bg-slate-900/80">
+            <div class="reveal-left rounded-[2rem] border border-slate-200/50 bg-white p-8 shadow-soft dark:border-white/10 dark:bg-slate-900/85">
               <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-light/10 text-brand-light">🚀</div>
               <h3 class="text-lg font-semibold text-slate-950 dark:text-white">Tez ish boshlash</h3>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Qisqa muddat ichida pilot loyihalar va demo natijalar.</p>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Pilot loyiha va natijalarni erta bosqichdan ko‘rsatamiz.</p>
             </div>
-            <div class="scroll-reveal rounded-3xl border border-slate-200/50 bg-white p-6 shadow-glow dark:border-white/10 dark:bg-slate-900/80">
+            <div class="reveal-right rounded-[2rem] border border-slate-200/50 bg-white p-8 shadow-soft dark:border-white/10 dark:bg-slate-900/85">
               <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-dark/10 text-brand-dark">💼</div>
               <h3 class="text-lg font-semibold text-slate-950 dark:text-white">Sifat nazorati</h3>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Har bir loyiha uchun qat'iy sifat va brend standartlari.</p>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Har bir loyiha qat'iy premium standartlar bo‘yicha tekshiriladi.</p>
             </div>
-            <div class="scroll-reveal rounded-3xl border border-slate-200/50 bg-white p-6 shadow-glow dark:border-white/10 dark:bg-slate-900/80">
+            <div class="reveal-left rounded-[2rem] border border-slate-200/50 bg-white p-8 shadow-soft dark:border-white/10 dark:bg-slate-900/85">
               <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-accent/10 text-brand-accent">📊</div>
               <h3 class="text-lg font-semibold text-slate-950 dark:text-white">O'lchovli natijalar</h3>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Analitika va KPIlarga asoslangan strategik optimizatsiya.</p>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Har bir qadamda KPI va analitika orqali samarani oshiramiz.</p>
             </div>
-            <div class="scroll-reveal rounded-3xl border border-slate-200/50 bg-white p-6 shadow-glow dark:border-white/10 dark:bg-slate-900/80">
+            <div class="reveal-right rounded-[2rem] border border-slate-200/50 bg-white p-8 shadow-soft dark:border-white/10 dark:bg-slate-900/85">
               <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-soft/10 text-brand-soft">🤝</div>
               <h3 class="text-lg font-semibold text-slate-950 dark:text-white">Halollik va ochiqlik</h3>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Har bir bosqichda muntazam aloqalar va aniq hisobotlar.</p>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Jarayonlarni shaffof va aniq uslubda olib boramiz.</p>
             </div>
           </div>
         </div>
       </section>
 
       <!-- ================== PORTFOLIO SECTION ================== -->
-      <section id="portfolio" class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-        <div class="mb-12 text-center">
+      <section id="portfolio" class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <div class="mb-14 text-center">
           <p class="text-sm uppercase tracking-[0.3em] text-brand-accent">Portfolio</p>
-          <h2 class="mt-4 text-4xl font-bold text-slate-950 dark:text-white">So'nggi ishlarimiz</h2>
-          <p class="mx-auto mt-4 max-w-2xl text-slate-600 dark:text-slate-400">Ijodiy dizayn va raqamli yechimlarni birlashtirgan loyihalarimiz bilan tanishing.</p>
+          <h2 class="mt-4 text-4xl font-bold text-slate-950 dark:text-white">Eng yaxshi ishlarimiz</h2>
+          <p class="mx-auto mt-4 max-w-2xl text-slate-600 dark:text-slate-400">Ijodkorlik va natija uyg‘unligi asosida yaratilgan loyihalarimizdan ilhom oling.</p>
         </div>
         <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          <article class="scroll-reveal overflow-hidden rounded-3xl border border-slate-200/50 bg-white transition hover:-translate-y-2 hover:shadow-glow dark:border-white/10 dark:bg-slate-900/80">
-            <img src="https://images.unsplash.com/photo-1519337265831-281ec6cc8514?auto=format&fit=crop&w=900&q=80" alt="Agеntlik veb-sayt dizayni" class="h-72 w-full object-cover transition duration-500 hover:scale-105" />
-            <div class="p-6">
-              <p class="text-sm uppercase tracking-[0.3em] text-brand-accent">Raqamli kampaniya</p>
-              <h3 class="mt-4 text-2xl font-semibold text-slate-950 dark:text-white">Innovatsion landing page</h3>
-              <p class="mt-3 text-slate-600 dark:text-slate-400">Ma'lumotlarni konversiyaga aylantirish uchun optimallashtirilgan dizayn.</p>
+          <article class="group relative overflow-hidden rounded-[2rem] border border-slate-200/50 bg-white transition duration-500 hover:-translate-y-2 hover:shadow-soft dark:border-white/10 dark:bg-slate-900/85">
+            <img src="https://images.unsplash.com/photo-1519337265831-281ec6cc8514?auto=format&fit=crop&w=900&q=80" alt="Agentlik veb-sayt dizayni" class="h-72 w-full object-cover transition duration-700 group-hover:scale-105" />
+            <div class="portfolio-overlay absolute inset-0"></div>
+            <div class="absolute inset-x-0 bottom-0 p-6 text-white opacity-0 transition duration-500 group-hover:opacity-100">
+              <p class="text-xs uppercase tracking-[0.3em] text-brand-accent">Raqamli kampaniya</p>
+              <h3 class="mt-3 text-2xl font-semibold">Innovatsion landing page</h3>
+              <p class="mt-3 text-sm text-slate-200">Ajratilgan brend maydoni va aniq chaqiriqlar bilan konversiyani oshirish.</p>
             </div>
           </article>
-          <article class="scroll-reveal overflow-hidden rounded-3xl border border-slate-200/50 bg-white transition hover:-translate-y-2 hover:shadow-glow dark:border-white/10 dark:bg-slate-900/80">
-            <img src="https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=900&q=80" alt="Raqamli marketing kampaniyasi" class="h-72 w-full object-cover transition duration-500 hover:scale-105" />
-            <div class="p-6">
-              <p class="text-sm uppercase tracking-[0.3em] text-brand-accent">Marketing</p>
-              <h3 class="mt-4 text-2xl font-semibold text-slate-950 dark:text-white">Maqsadli reklama strategiyasi</h3>
-              <p class="mt-3 text-slate-600 dark:text-slate-400">Har bir auditoriya uchun maxsus tayyorlangan kampaniya.</p>
+          <article class="group relative overflow-hidden rounded-[2rem] border border-slate-200/50 bg-white transition duration-500 hover:-translate-y-2 hover:shadow-soft dark:border-white/10 dark:bg-slate-900/85">
+            <img src="https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=900&q=80" alt="Raqamli marketing kampaniyasi" class="h-72 w-full object-cover transition duration-700 group-hover:scale-105" />
+            <div class="portfolio-overlay absolute inset-0"></div>
+            <div class="absolute inset-x-0 bottom-0 p-6 text-white opacity-0 transition duration-500 group-hover:opacity-100">
+              <p class="text-xs uppercase tracking-[0.3em] text-brand-accent">Marketing</p>
+              <h3 class="mt-3 text-2xl font-semibold">Maqsadli reklama strategiyasi</h3>
+              <p class="mt-3 text-sm text-slate-200">Har bir auditoriyaga moslashtirilgan kontent va media rejalar.</p>
             </div>
           </article>
-          <article class="scroll-reveal overflow-hidden rounded-3xl border border-slate-200/50 bg-white transition hover:-translate-y-2 hover:shadow-glow dark:border-white/10 dark:bg-slate-900/80">
-            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80" alt="Brend hikoyasi va dizayn loyihasi" class="h-72 w-full object-cover transition duration-500 hover:scale-105" />
-            <div class="p-6">
-              <p class="text-sm uppercase tracking-[0.3em] text-brand-accent">Brend</p>
-              <h3 class="mt-4 text-2xl font-semibold text-slate-950 dark:text-white">Brend identifikatsiyasi</h3>
-              <p class="mt-3 text-slate-600 dark:text-slate-400">Ushbu loyiha uchun noyob vizual til yaratildi.</p>
+          <article class="group relative overflow-hidden rounded-[2rem] border border-slate-200/50 bg-white transition duration-500 hover:-translate-y-2 hover:shadow-soft dark:border-white/10 dark:bg-slate-900/85">
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80" alt="Brend hikoyasi va dizayn loyihasi" class="h-72 w-full object-cover transition duration-700 group-hover:scale-105" />
+            <div class="portfolio-overlay absolute inset-0"></div>
+            <div class="absolute inset-x-0 bottom-0 p-6 text-white opacity-0 transition duration-500 group-hover:opacity-100">
+              <p class="text-xs uppercase tracking-[0.3em] text-brand-accent">Brend</p>
+              <h3 class="mt-3 text-2xl font-semibold">Brend identifikatsiyasi</h3>
+              <p class="mt-3 text-sm text-slate-200">Noyob vizual til va brend hikoya orqali auditoriyani jalb qilamiz.</p>
             </div>
           </article>
-          <article class="scroll-reveal overflow-hidden rounded-3xl border border-slate-200/50 bg-white transition hover:-translate-y-2 hover:shadow-glow dark:border-white/10 dark:bg-slate-900/80">
-            <img src="https://images.unsplash.com/photo-1521790366217-35a55fa5a642?auto=format&fit=crop&w=900&q=80" alt="Mobil dizayn va ilova loyiha" class="h-72 w-full object-cover transition duration-500 hover:scale-105" />
-            <div class="p-6">
-              <p class="text-sm uppercase tracking-[0.3em] text-brand-accent">Mobil</p>
-              <h3 class="mt-4 text-2xl font-semibold text-slate-950 dark:text-white">Responsiv mobil interfeys</h3>
-              <p class="mt-3 text-slate-600 dark:text-slate-400">Kerakli barcha qurilmalarda mukammal ishlash ta'minlandi.</p>
+          <article class="group relative overflow-hidden rounded-[2rem] border border-slate-200/50 bg-white transition duration-500 hover:-translate-y-2 hover:shadow-soft dark:border-white/10 dark:bg-slate-900/85">
+            <img src="https://images.unsplash.com/photo-1521790366217-35a55fa5a642?auto=format&fit=crop&w=900&q=80" alt="Mobil dizayn va ilova loyiha" class="h-72 w-full object-cover transition duration-700 group-hover:scale-105" />
+            <div class="portfolio-overlay absolute inset-0"></div>
+            <div class="absolute inset-x-0 bottom-0 p-6 text-white opacity-0 transition duration-500 group-hover:opacity-100">
+              <p class="text-xs uppercase tracking-[0.3em] text-brand-accent">Mobil</p>
+              <h3 class="mt-3 text-2xl font-semibold">Responsiv mobil interfeys</h3>
+              <p class="mt-3 text-sm text-slate-200">Har bir ekran uchun mukammal moslashuv va intuitiv foydalanish.</p>
             </div>
           </article>
-          <article class="scroll-reveal overflow-hidden rounded-3xl border border-slate-200/50 bg-white transition hover:-translate-y-2 hover:shadow-glow dark:border-white/10 dark:bg-slate-900/80">
-            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="Kreativ dizayn agentligi ish faoliyati" class="h-72 w-full object-cover transition duration-500 hover:scale-105" />
-            <div class="p-6">
-              <p class="text-sm uppercase tracking-[0.3em] text-brand-accent">Kreativ</p>
-              <h3 class="mt-4 text-2xl font-semibold text-slate-950 dark:text-white">Premium dizayn yechimlari</h3>
-              <p class="mt-3 text-slate-600 dark:text-slate-400">Chiroyli va sezgir dizaynlar mijozlar e'tiborini tortadi.</p>
+          <article class="group relative overflow-hidden rounded-[2rem] border border-slate-200/50 bg-white transition duration-500 hover:-translate-y-2 hover:shadow-soft dark:border-white/10 dark:bg-slate-900/85">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="Kreativ dizayn agentligi ish faoliyati" class="h-72 w-full object-cover transition duration-700 group-hover:scale-105" />
+            <div class="portfolio-overlay absolute inset-0"></div>
+            <div class="absolute inset-x-0 bottom-0 p-6 text-white opacity-0 transition duration-500 group-hover:opacity-100">
+              <p class="text-xs uppercase tracking-[0.3em] text-brand-accent">Kreativ</p>
+              <h3 class="mt-3 text-2xl font-semibold">Premium dizayn yechimlari</h3>
+              <p class="mt-3 text-sm text-slate-200">Chiroyli va sezgir dizaynlar mijozlar e'tiborini tortadi.</p>
             </div>
           </article>
-          <article class="scroll-reveal overflow-hidden rounded-3xl border border-slate-200/50 bg-white transition hover:-translate-y-2 hover:shadow-glow dark:border-white/10 dark:bg-slate-900/80">
-            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" alt="Raqamli ommaviy axborot vositalari uchun loyiha" class="h-72 w-full object-cover transition duration-500 hover:scale-105" />
-            <div class="p-6">
-              <p class="text-sm uppercase tracking-[0.3em] text-brand-accent">Media</p>
-              <h3 class="mt-4 text-2xl font-semibold text-slate-950 dark:text-white">Campaniya g'olib strategiyasi</h3>
-              <p class="mt-3 text-slate-600 dark:text-slate-400">Natijaga yo'naltirilgan kontent va ijodiy yondashuv.</p>
+          <article class="group relative overflow-hidden rounded-[2rem] border border-slate-200/50 bg-white transition duration-500 hover:-translate-y-2 hover:shadow-soft dark:border-white/10 dark:bg-slate-900/85">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" alt="Raqamli ommaviy axborot vositalari uchun loyiha" class="h-72 w-full object-cover transition duration-700 group-hover:scale-105" />
+            <div class="portfolio-overlay absolute inset-0"></div>
+            <div class="absolute inset-x-0 bottom-0 p-6 text-white opacity-0 transition duration-500 group-hover:opacity-100">
+              <p class="text-xs uppercase tracking-[0.3em] text-brand-accent">Media</p>
+              <h3 class="mt-3 text-2xl font-semibold">Campaniya g'olib strategiyasi</h3>
+              <p class="mt-3 text-sm text-slate-200">Natijaga yo‘naltirilgan kontent va ijodiy yondashuv.</p>
             </div>
           </article>
         </div>
       </section>
 
       <!-- ================== WHY CHOOSE US SECTION ================== -->
-      <section class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-        <div class="grid gap-12 rounded-[2rem] border border-slate-200/50 bg-white p-10 shadow-glow dark:border-white/10 dark:bg-slate-900/80 lg:grid-cols-3">
-          <div class="space-y-6 lg:col-span-1">
+      <section class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <div class="grid gap-12 rounded-[2.5rem] border border-slate-200/50 bg-white p-12 shadow-[0_40px_120px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-slate-900/85 lg:grid-cols-3">
+          <div class="space-y-6">
             <p class="text-sm uppercase tracking-[0.3em] text-brand-accent">Nima uchun biz?</p>
-            <h2 class="text-4xl font-bold text-slate-950 dark:text-white">Sizning natijalaringizga sodiq hamkor</h2>
-            <p class="text-slate-600 dark:text-slate-400">Biz loyihangizni strategik maqsadlarga muvofiq ishlab chiqamiz, shunda siz aniq o'sish va raqamli qiymatga erishasiz.</p>
+            <h2 class="text-4xl font-bold text-slate-950 dark:text-white">Siz uchun natijaga yo‘naltirilgan premium hamkor</h2>
+            <p class="text-slate-600 dark:text-slate-400">Loyiha sizning biznes maqsadlaringizdan boshlanadi va auditoriya ehtiyojlariga javob beradi. Sizga ishonchli, zamonaviy va oson o‘zlashtiriladigan yechimlar taqdim etamiz.</p>
           </div>
           <div class="grid gap-6 sm:grid-cols-2 lg:col-span-2">
-            <div class="scroll-reveal rounded-3xl bg-slate-50 p-8 text-center dark:bg-slate-950/80">
+            <div class="reveal-left rounded-[2rem] bg-slate-50 p-8 text-center dark:bg-slate-950/80">
               <p class="text-5xl font-bold text-brand-light">120+</p>
               <p class="mt-3 text-slate-600 dark:text-slate-400">Muvaffaqiyatli loyiha</p>
             </div>
-            <div class="scroll-reveal rounded-3xl bg-slate-50 p-8 text-center dark:bg-slate-950/80">
+            <div class="reveal-right rounded-[2rem] bg-slate-50 p-8 text-center dark:bg-slate-950/80">
               <p class="text-5xl font-bold text-brand-accent">8x</p>
               <p class="mt-3 text-slate-600 dark:text-slate-400">O'rtacha konversiya oshishi</p>
             </div>
-            <div class="scroll-reveal rounded-3xl bg-slate-50 p-8 text-center dark:bg-slate-950/80">
+            <div class="reveal-left rounded-[2rem] bg-slate-50 p-8 text-center dark:bg-slate-950/80">
               <p class="text-5xl font-bold text-brand-dark">15</p>
-              <p class="mt-3 text-slate-600 dark:text-slate-400">Sanoat bo'yicha maxsus ekspertlar</p>
+              <p class="mt-3 text-slate-600 dark:text-slate-400">Sanoat bo'yicha ekspertlar</p>
             </div>
-            <div class="scroll-reveal rounded-3xl bg-slate-50 p-8 text-center dark:bg-slate-950/80">
+            <div class="reveal-right rounded-[2rem] bg-slate-50 p-8 text-center dark:bg-slate-950/80">
               <p class="text-5xl font-bold text-brand-soft">98%</p>
               <p class="mt-3 text-slate-600 dark:text-slate-400">Mijoz mamnuniyati reytingi</p>
             </div>
@@ -286,15 +329,15 @@
       </section>
 
       <!-- ================== TESTIMONIALS SECTION ================== -->
-      <section class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-        <div class="mb-12 text-center">
+      <section class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <div class="mb-14 text-center">
           <p class="text-sm uppercase tracking-[0.3em] text-brand-accent">Mijozlarimizdan</p>
           <h2 class="mt-4 text-4xl font-bold text-slate-950 dark:text-white">Nima deyishadi hamkorlarimiz</h2>
-          <p class="mx-auto mt-4 max-w-2xl text-slate-600 dark:text-slate-400">Tajribali mijozlarimiz bilan erishilgan natijalar va muvaffaqiyatli hamkorliklar.</p>
+          <p class="mx-auto mt-4 max-w-2xl text-slate-600 dark:text-slate-400">Haqiqiy natijalar va doimiy hamkorlik bizning eng yaxshi reklama ekanini bilamiz.</p>
         </div>
         <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          <article class="scroll-reveal rounded-3xl border border-slate-200/50 bg-white p-8 dark:border-white/10 dark:bg-slate-900/80">
-            <p class="text-slate-700 dark:text-slate-300">“Ularning jamoasi strategiya va ijodiy yondashuvni mukammal holda birlashtirdi. Natijalar kutilganidan yuqori bo'ldi.”</p>
+          <article class="reveal-left rounded-[2rem] border border-slate-200/50 bg-white p-8 dark:border-white/10 dark:bg-slate-900/85">
+            <p class="text-slate-700 dark:text-slate-300">“Ularning strategik va ijodiy yondashuvi natijalarimizni sezilarli darajada yaxshiladi. Har bir detalga e'tibor berildi.”</p>
             <div class="mt-6 flex items-center gap-4">
               <div class="h-12 w-12 rounded-full bg-brand-light/15"></div>
               <div>
@@ -303,8 +346,8 @@
               </div>
             </div>
           </article>
-          <article class="scroll-reveal rounded-3xl border border-slate-200/50 bg-white p-8 dark:border-white/10 dark:bg-slate-900/80">
-            <p class="text-slate-700 dark:text-slate-300">“Jamoa bizning brendimizni jonlantirib, foydalanuvchi oqimini aniq optimallashtirdi. Hamkorlik juda yoqimli bo'ldi.”</p>
+          <article class="reveal-right rounded-[2rem] border border-slate-200/50 bg-white p-8 dark:border-white/10 dark:bg-slate-900/85">
+            <p class="text-slate-700 dark:text-slate-300">“Brendimizni yanada ma'noli va jozibador qilib yaratishdi. Ishonchli, halol va tezkor hamkor.”</p>
             <div class="mt-6 flex items-center gap-4">
               <div class="h-12 w-12 rounded-full bg-brand-dark/15"></div>
               <div>
@@ -313,8 +356,8 @@
               </div>
             </div>
           </article>
-          <article class="scroll-reveal rounded-3xl border border-slate-200/50 bg-white p-8 dark:border-white/10 dark:bg-slate-900/80">
-            <p class="text-slate-700 dark:text-slate-300">“Ularning yondashuvi aniq va natijaviy. Bizning reklama kampaniyamiz konversiyasini sezilarli darajada oshirdi.”</p>
+          <article class="reveal-left rounded-[2rem] border border-slate-200/50 bg-white p-8 dark:border-white/10 dark:bg-slate-900/85">
+            <p class="text-slate-700 dark:text-slate-300">“Ularning yondashuvi aniq va natijaviy. Kampaniyalarimizdagi konversiya sezilarli darajada oshdi.”</p>
             <div class="mt-6 flex items-center gap-4">
               <div class="h-12 w-12 rounded-full bg-brand-accent/15"></div>
               <div>
@@ -323,8 +366,8 @@
               </div>
             </div>
           </article>
-          <article class="scroll-reveal rounded-3xl border border-slate-200/50 bg-white p-8 dark:border-white/10 dark:bg-slate-900/80">
-            <p class="text-slate-700 dark:text-slate-300">“Professional va samarali ishlashlari tufayli bizning saytimiz yanada ishonchli va zamonaviy ko'rinishga ega bo'ldi.”</p>
+          <article class="reveal-right rounded-[2rem] border border-slate-200/50 bg-white p-8 dark:border-white/10 dark:bg-slate-900/85">
+            <p class="text-slate-700 dark:text-slate-300">“Professional ishlashlari tufayli saytimiz ishonchli va yuqori darajada taqdim etildi. Har qanday savolga tez javob berishdi.”</p>
             <div class="mt-6 flex items-center gap-4">
               <div class="h-12 w-12 rounded-full bg-brand-soft/15"></div>
               <div>
@@ -337,18 +380,29 @@
       </section>
 
       <!-- ================== CONTACT SECTION ================== -->
-      <section id="contact" class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-        <div class="rounded-[2rem] border border-slate-200/50 bg-white p-10 shadow-glow dark:border-white/10 dark:bg-slate-950/90">
+      <section id="contact" class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <div class="rounded-[2.5rem] border border-slate-200/50 bg-gradient-to-br from-white via-slate-50 to-slate-100 p-10 shadow-[0_40px_120px_rgba(15,23,42,0.08)] dark:border-white/10 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900 dark:bg-slate-950/95">
           <div class="text-center space-y-6">
             <p class="text-sm uppercase tracking-[0.3em] text-brand-accent">Kontakt</p>
             <h2 class="text-4xl font-bold text-slate-950 dark:text-white">Loyiha haqida gaplashamizmi?</h2>
-            <p class="mx-auto max-w-2xl text-slate-600 dark:text-slate-400">Sizning biznesingiz uchun professional yechimlarni Telegram yoki telefon orqali muhokama qilaylik. Ikkalasini ham tanlang va biz bilan tezda bog‘laning.</p>
+            <p class="mx-auto max-w-2xl text-slate-600 dark:text-slate-400">Soff.uz uchun maxsus ishlab chiqilgan premium biznes landing page sherikligimizni boshlang. Telegram va telefon orqali tezda bog‘laning.</p>
           </div>
-          <div class="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <!-- Bu yerga o'z Telegram username'ingizni yozing -->
-            <a href="https://t.me/YOUR_TELEGRAM" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full bg-blue-600 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700">Telegramda yozing</a>
-            <!-- Bu yerga o'z telefon raqamingizni yozing -->
-            <a href="tel:+998901234567" class="inline-flex items-center justify-center rounded-full border border-slate-900/10 bg-slate-950/5 px-8 py-4 text-sm font-semibold text-slate-950 transition hover:border-brand-light hover:text-brand-light dark:border-white/20 dark:bg-white/5 dark:text-white">+998 90 123 45 67</a>
+          <div class="mt-12 grid gap-6 lg:grid-cols-3">
+            <div class="rounded-[2rem] bg-white p-8 text-center shadow-soft dark:bg-slate-950/90 dark:border dark:border-white/5">
+              <p class="text-sm uppercase tracking-[0.3em] text-slate-500">Telegram</p>
+              <a href="https://t.me/YOUR_TELEGRAM" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex text-xl font-semibold text-brand-dark hover:text-brand-light">@YOUR_TELEGRAM</a>
+              <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Tez va shaxsiy maslahat uchun.</p>
+            </div>
+            <div class="rounded-[2rem] bg-white p-8 text-center shadow-soft dark:bg-slate-950/90 dark:border dark:border-white/5">
+              <p class="text-sm uppercase tracking-[0.3em] text-slate-500">Telefon</p>
+              <a href="tel:+998901234567" class="mt-4 inline-flex text-xl font-semibold text-brand-dark hover:text-brand-light">+998 90 123 45 67</a>
+              <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Qo‘ng‘iroq yoki SMS orqali bog‘laning.</p>
+            </div>
+            <div class="rounded-[2rem] bg-white p-8 text-center shadow-soft dark:bg-slate-950/90 dark:border dark:border-white/5">
+              <p class="text-sm uppercase tracking-[0.3em] text-slate-500">Email</p>
+              <a href="mailto:hello@biznesstudio.uz" class="mt-4 inline-flex text-xl font-semibold text-brand-dark hover:text-brand-light">hello@biznesstudio.uz</a>
+              <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Loyiha tafsilotlarini yozma ravishda yuboring.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -407,8 +461,8 @@
           entry.target.classList.add('active');
         }
       });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
+    }, { threshold: 0.18 });
+    document.querySelectorAll('.scroll-reveal, .reveal-left, .reveal-right').forEach((el) => observer.observe(el));
   </script>
 </body>
 </html>
